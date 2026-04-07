@@ -2817,55 +2817,75 @@
 
     /* --- MOBILE LARGE (≤ 768px) --- */
     /* ============================================================
-       MOBILE GLOBAL — anti-débordement complet
+       MOBILE GLOBAL — anti-débordement complet v3
     ============================================================ */
     @media (max-width: 768px) {
 
-      /* ── BASE : empêche tout débordement horizontal ── */
+      /* ── 0. BASE OVERFLOW CONTROL ── */
       html, body {
         overflow-x: hidden !important;
         width: 100% !important;
         max-width: 100vw !important;
       }
-
-      /* Sections & wrappers principaux */
       section, header, footer, main, nav {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box;
         overflow-x: hidden;
       }
-
-      /* Containers */
       .container, .container-wide {
         width: 100% !important;
         max-width: 100% !important;
         padding-left: 16px !important;
         padding-right: 16px !important;
       }
-
-      /* Images & médias */
-      img, video, iframe {
-        max-width: 100% !important;
-        height: auto;
-      }
-
-      /* Tous les enfants flex/grid ne débordent pas */
+      img, video, iframe { max-width: 100% !important; height: auto; }
       *, *::before, *::after { min-width: 0; box-sizing: border-box; }
 
-      /* ── NAV ── */
+      /* ── 1. CACHE LES DÉCORATIONS FLOTTANTES ── */
+      .hero-bg-shopify,
+      .hero-bg-ecom,
+      .ctesti-stat,
+      .ctesti-real,
+      .rd-sticker,
+      .basile-sticker-wrap,
+      .res-cert-badge,
+      .res-deco-gold,
+      .res-deco-dark,
+      .cfaq-sticker,
+      .fnd-badge.bd3 {
+        display: none !important;
+      }
+
+      /* ── 2. NAV ── */
       .nav-links, .nav-cta { display: none; }
       .nav-hamburger { display: flex; }
 
-      /* ── HERO ── */
-      h1 { font-size: clamp(1.9rem, 7vw, 2.8rem); }
-      .hero-title-row { gap: 8px; flex-wrap: wrap; }
+      /* ── 3. HERO ── */
+      h1 { font-size: clamp(1.65rem, 6.5vw, 2.2rem) !important; }
+      .hero-title-row { gap: 8px; flex-wrap: wrap; justify-content: center; }
       .hero-rotating-wrapper {
         min-width: 0 !important;
-        max-width: calc(100vw - 48px) !important;
-        padding: 6px 16px;
-        font-size: clamp(1.4rem, 5.5vw, 2rem);
+        width: auto !important;
+        max-width: 90vw !important;
+        height: auto !important;
+        padding: 6px 18px !important;
+        font-size: clamp(1.1rem, 4.5vw, 1.55rem) !important;
         flex-shrink: 1 !important;
+        overflow: visible !important;
+      }
+      .hero-rotating-word {
+        position: relative !important;
+        opacity: 1 !important;
+        transform: none !important;
+        white-space: normal !important;
+        word-break: break-word !important;
+        display: none;
+      }
+      .hero-rotating-word.active {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
       }
       .hero-subtitle { font-size: 0.88rem; }
       .hero-buttons { flex-direction: row; flex-wrap: wrap; gap: 10px; justify-content: center; }
@@ -2883,20 +2903,41 @@
       .reassurance-badges::-webkit-scrollbar { display: none; }
       .badge { flex-shrink: 0; font-size: 0.72rem; padding: 6px 10px; }
 
-      /* ── WHY — 2 colonnes ── */
+      /* ── 4. WHY — 2 colonnes ── */
       .why-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
       .why-card { padding: 16px 12px; }
       .why-card h3 { font-size: 0.9rem; }
       .why-icon-circle { width: 38px; height: 38px; }
 
-      /* ── BENTO — 2 colonnes ── */
-      .bento-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
-      .bc-basile  { grid-column: 1 / -1; min-height: 230px; }
-      .bc-carousel{ grid-column: 1 / -1; }
-      .bc-counter, .bc-review, .bc-list,
-      .bc-days, .bc-tools, .bc-boutique { grid-column: span 1; }
+      /* ── 5. BENTO — 1 COLONNE sur mobile ── */
+      .bento-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      .bc-basile, .bc-carousel, .bc-counter, .bc-review,
+      .bc-list, .bc-days, .bc-tools, .bc-boutique {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+        width: 100% !important;
+      }
+      .bc-basile {
+        min-height: 0 !important;
+        display: flex;
+        flex-direction: column;
+      }
+      .bc-basile img {
+        width: 100% !important;
+        height: 260px !important;
+        object-fit: cover;
+        object-position: top center;
+      }
+      .bc-basile h3, .bc h3 {
+        font-size: 1rem !important;
+        word-break: break-word !important;
+        hyphens: auto !important;
+      }
 
-      /* ── PROCESS — scroll horizontal ── */
+      /* ── 6. PROCESS — scroll horizontal ── */
       .process-tabs {
         display: flex; overflow-x: auto; flex-wrap: nowrap;
         gap: 8px; scrollbar-width: none; padding-bottom: 4px; -webkit-overflow-scrolling: touch;
@@ -2904,7 +2945,7 @@
       .process-tabs::-webkit-scrollbar { display: none; }
       .process-tab { flex-shrink: 0; padding: 8px 14px; font-size: 0.76rem; }
 
-      /* ── SECTION SOLUTIONS (res-cream) ── */
+      /* ── 7. SECTION SOLUTIONS (res-cream) ── */
       .res-cream {
         padding: 20px 16px !important;
         border-radius: 16px !important;
@@ -2955,14 +2996,12 @@
       .res-price .price-v { font-size: 1.25rem !important; }
       .res-price-icon { width: 34px; height: 34px; }
       .res-price .from-lbl { font-size: 0.65rem; }
-      .res-cert-badge { display: none; }
-      .res-deco-gold, .res-deco-dark { display: none; }
 
-      /* ── MARQUEE ── */
+      /* ── 8. MARQUEE ── */
       .mqb-pill { font-size: 0.74rem; padding: 7px 13px; }
       .mqb-inner { max-width: 100%; }
 
-      /* ── FOUNDER ── */
+      /* ── 9. FOUNDER ── */
       .fnd-main { grid-template-columns: 1fr; gap: 36px; }
       .fnd-photo-col { padding: 20px 40px; display: flex; justify-content: center; }
       .fnd-content-col { text-align: center; padding: 0 4px; }
@@ -2970,40 +3009,47 @@
       .fnd-highlights { justify-content: center; }
       .fnd-badge.bd1 { right: 0; top: 0; }
       .fnd-badge.bd2 { left: 0; bottom: 10px; }
-      .fnd-badge.bd3 { display: none; }
       .fnd-reviews-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
       .fnd-rv { padding: 16px; }
 
-      /* ── CALCULATOR ── */
+      /* ── 10. CALCULATOR ── */
       .calc-card  { padding: 24px 16px; border-radius: 16px; }
       .calc-inner { grid-template-columns: 1fr; gap: 24px; }
       .calc-header h2 { font-size: clamp(1.5rem, 5vw, 2rem); }
 
-      /* ── COMB / FAQ ── */
+      /* ── 11. TÉMOIGNAGES ── */
       .comb-sec { padding: 50px 0 0; }
-      .ctesti-card { width: 260px; padding: 16px; flex-shrink: 0; }
-      .cfaq-sticker { display: none; }
+      .ctesti-outer { overflow-x: auto !important; }
+      .ctesti-track { animation: none !important; }
+      .ctesti-card {
+        width: 82vw !important;
+        flex-shrink: 0;
+        padding: 18px !important;
+      }
+
+      /* ── 12. FAQ ── */
       .cfaq-q { padding: 14px 16px; }
       .cfaq-ans-inner { padding: 0 16px 14px; }
       .comb-to-dark { height: 120px; }
       .comb-faq-hd h2 { font-size: clamp(1.4rem, 5vw, 2rem); }
 
-      /* ── CTA FORM ── */
+      /* ── 13. CTA FORM ── */
       .cta-form { flex-direction: row; flex-wrap: wrap; gap: 10px; }
       .cta-input { flex: 1; min-width: 0; }
       .cta-btn   { flex-shrink: 0; }
 
-      /* ── FOOTER — 2 colonnes ── */
+      /* ── 14. FOOTER — 2 colonnes ── */
       .footer-inner  { grid-template-columns: 1fr 1fr; gap: 24px; }
       .footer-bottom { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 8px; }
     }
 
     /* ── MOBILE PETIT (≤ 520px) ── */
     @media (max-width: 520px) {
+      h1 { font-size: clamp(1.5rem, 6vw, 2rem) !important; }
       .hero-buttons { flex-direction: column; align-items: stretch; }
       .hero-btn { min-width: unset; text-align: center; }
       .why-grid { grid-template-columns: 1fr !important; }
-      .bento-grid { grid-template-columns: 1fr 1fr !important; gap: 8px; }
+      .bento-grid { grid-template-columns: 1fr !important; gap: 10px; }
       .fnd-photo-wrap     { width: 210px; height: 290px; }
       .fnd-photo-backdrop { width: 230px; height: 310px; }
       .fnd-photo-col { padding: 14px 16px; }
@@ -3018,20 +3064,19 @@
       .footer-bottom { flex-direction: column; text-align: center; }
       .process-timeline::before { left: 16px; }
       .step-number { width: 34px; height: 34px; font-size: 0.85rem; }
+      .ctesti-card { width: 88vw !important; }
     }
 
     /* ── TRÈS PETIT (≤ 380px) ── */
     @media (max-width: 380px) {
-      .bento-grid { grid-template-columns: 1fr !important; }
-      .bc-basile, .bc-carousel { grid-column: 1; }
-      h1 { font-size: 1.85rem; }
+      h1 { font-size: 1.5rem !important; }
       .hero-img-right { display: none; }
       .hero-img-left  { left: 0; }
       .hero-img-center { margin: 0 auto; }
       .res-stats  { grid-template-columns: 1fr !important; }
       .res-prices { grid-template-columns: 1fr !important; }
+      .ctesti-card { width: 92vw !important; }
     }
-  
   </style>
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
