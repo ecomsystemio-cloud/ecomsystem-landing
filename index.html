@@ -18,7 +18,8 @@
   <meta name="robots" content="index, follow" />
   <meta name="language" content="French" />
   <meta name="revisit-after" content="7 days" />
-  <link rel="canonical" href="https://ecomsystem.fr" />
+  <link rel="canonical" href="https://the-ecomsystem.com" />
+  <link rel="sitemap" type="application/xml" href="https://the-ecomsystem.com/sitemap.xml" />
 
   <!-- ═══ Open Graph / Facebook ═══ -->
   <meta property="og:type" content="website" />
@@ -3128,6 +3129,15 @@
       .ctesti-card { width: 92vw !important; }
     }
   </style>
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ME8LJN3YVB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ME8LJN3YVB');
+  </script>
+
   <!-- GSAP + ScrollTrigger -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
@@ -4907,9 +4917,9 @@
     <div class="footer-bottom">
       <p>© 2026 ECOMSYSTEM. Tous droits réservés. Fondé par Basile.</p>
       <div class="footer-bottom-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">CGV</a>
-        <a href="#">Confidentialité</a>
+        <a href="mentions-legales.html">Mentions légales</a>
+        <a href="cgv.html">CGV</a>
+        <a href="confidentialite.html">Confidentialité</a>
       </div>
     </div>
   </div>
@@ -5167,6 +5177,112 @@
 
 
 
+</script>
+
+
+<!-- ============================================================
+     BANNIÈRE COOKIES
+============================================================ -->
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 99999;
+    background: #111111;
+    border-top: 1px solid #C8A96E;
+    border-radius: 16px 16px 0 0;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    transform: translateY(0);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    opacity: 1;
+  }
+  .cookie-banner.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+  }
+  .cookie-text {
+    flex: 1;
+    min-width: 260px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.85rem;
+    color: #ccc;
+    line-height: 1.6;
+  }
+  .cookie-text a {
+    color: #C8A96E;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .cookie-actions {
+    display: flex;
+    gap: 12px;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  .cookie-btn-accept {
+    background: #C8A96E;
+    color: #000;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 700;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .cookie-btn-accept:hover { background: #DEC08A; }
+  .cookie-btn-refuse {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.84rem;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .cookie-btn-refuse:hover { border-color: #fff; color: #fff; }
+  @media (max-width: 600px) {
+    .cookie-banner { padding: 20px 16px; gap: 16px; }
+    .cookie-actions { width: 100%; flex-direction: column; }
+    .cookie-btn-accept, .cookie-btn-refuse { width: 100%; text-align: center; }
+  }
+</style>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p class="cookie-text">
+    Nous utilisons des cookies pour améliorer votre expérience sur notre site, analyser le trafic et personnaliser le contenu.
+    En continuant à naviguer, vous acceptez notre utilisation des cookies.
+    <a href="confidentialite.html">En savoir plus</a>
+  </p>
+  <div class="cookie-actions">
+    <button class="cookie-btn-accept" onclick="cookieChoice('accepted')">Accepter tout</button>
+    <button class="cookie-btn-refuse" onclick="cookieChoice('refused')">Refuser</button>
+  </div>
+</div>
+
+<script>
+  (function() {
+    var choice = localStorage.getItem('cookieConsent');
+    if (choice) {
+      document.getElementById('cookieBanner').classList.add('hidden');
+    }
+  })();
+  function cookieChoice(val) {
+    localStorage.setItem('cookieConsent', val);
+    var banner = document.getElementById('cookieBanner');
+    banner.classList.add('hidden');
+  }
 </script>
 
 </body>
